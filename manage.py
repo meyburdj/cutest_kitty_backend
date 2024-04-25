@@ -2,6 +2,7 @@ import sys
 import os
 
 from src import create_app
+from flask.cli import FlaskGroup
 
 app = create_app()
 cli = FlaskGroup(create_app=create_app)
