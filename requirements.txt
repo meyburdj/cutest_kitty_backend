@@ -1,0 +1,9 @@
+Flask[async]
+flask-restx
+Flask-Cors
+gunicorn
+Werkzeug
+openai
+asyncio
+Flask-SQLAlchemy==3.0.3
+psycopg2-binary==2.9.5
