@@ -12,7 +12,7 @@ class CatData(BaseModel):
 
 class CatGroup(BaseModel):
     cat_creation_prompt: str 
-    cat_vission_prompt: str 
+    cat_vision_prompt: str 
     cats: List[CatData]
 
 
