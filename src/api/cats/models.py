@@ -65,7 +65,6 @@ class CatGroup(db.Model):
 
     cats = db.relationship('Cat', backref='cat_group', lazy=True)
 
-    def __init__(self, creation_date, cat_creation_prompt, cat_vision_prompt):
-        self.creation_date=creation_date
+    def __init__(self, cat_creation_prompt, cat_vision_prompt):
         self.cat_creation_prompt=cat_creation_prompt
         self.cat_vision_prompt=cat_vision_prompt
