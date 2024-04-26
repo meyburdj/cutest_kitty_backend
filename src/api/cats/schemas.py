@@ -5,13 +5,16 @@ class NewCatData(BaseModel):
     url: HttpUrl
     score: int
     cat_group_id: int
-    
-class ImageData(BaseModel):
+
+class CatData(BaseModel):
     url: HttpUrl
     score: int
 
-class ImageGroup(BaseModel):
-    images: List[ImageData]
+class CatGroup(BaseModel):
+    cat_creation_prompt: str 
+    cat_vission_prompt: str 
+    cats: List[CatData]
+
 
 class CatRatingResponse(BaseModel):
-    groups: List[ImageGroup]
+    groups: List[CatGroup]
