@@ -1,6 +1,6 @@
 import asyncio
 from flask_restx import  Namespace, Resource
-from flask import request
+from flask import request, Response
 from src.api.utils.orchestration import orchestrate_cat_ratings
 from src.api.cats.crud import read_all_cat_ratings, create_group_and_cats
 from src.api.cats.schemas import CatRatingResponse, CatGroup, CatData, NewCatData
@@ -10,8 +10,10 @@ cats_namespace = Namespace("cats")
 class CatRatingsList(Resource):
     def get(self):
         """Returns all cat ratings with images."""
-        cat_ratings = read_all_cat_ratings()  
-        return CatRatingResponse(groups=cat_ratings).json(), 200
+        cat_ratings = read_all_cat_ratings()
+        response = CatRatingResponse(groups=cat_ratings)
+        response_json = response.json()
+        return Response(response_json, mimetype='application/json', status=200)
 
 
     def post(self):
