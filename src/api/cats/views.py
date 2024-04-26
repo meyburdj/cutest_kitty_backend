@@ -1,10 +1,11 @@
 import asyncio
-from flask_restx import  Resource
+from flask_restx import  Namespace, Resource
 from flask import request
 from src.api.utils.orchestration import orchestrate_cat_ratings
 from src.api.cats.crud import read_all_cat_ratings, create_group_and_cats
-from src.api.cats.schemas import CatRatingResponse, ImageData, ImageGroup
+from src.api.cats.schemas import CatRatingResponse, CatGroup, CatData, NewCatData
 
+cats_namespace = Namespace("cats")
 
 class CatRatingsList(Resource):
     def get(self):
