@@ -2,12 +2,12 @@ from pydantic import BaseModel, HttpUrl
 from typing import List
 
 class NewCatData(BaseModel):
-    url: HttpUrl
+    url: str
     score: int
     cat_group_id: int
 
 class CatData(BaseModel):
-    url: HttpUrl
+    url: str
     score: int
 
 class CatGroup(BaseModel):
