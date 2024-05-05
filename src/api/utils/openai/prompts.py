@@ -1,5 +1,4 @@
 def generate_image_prompt(cat_creation_prompt_details):
-    print('cat_creation_prompt_details', cat_creation_prompt_details)
     prompt_parts = ['a cat']
 
     # Add descriptive details based on user selections
@@ -20,7 +19,6 @@ def generate_image_prompt(cat_creation_prompt_details):
     return prompt
 
 def analyze_image_prompt(cat_analyze_prompt_details):
-    print('cat_analyze_prompt_details', cat_analyze_prompt_details)
     prompt_base = (
         "You are a professional cat-cuteness judge at the most prestigious competition for cat "
         "cuteness in the world. The stakes are high, and your judgment must be precise. "

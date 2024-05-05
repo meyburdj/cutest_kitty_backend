@@ -10,12 +10,10 @@ async def create_group_and_cats(cat_creation_prompt, cat_vision_prompt):
     dictionary representation of cats group'''
 
     generate_prompt =  generate_image_prompt(cat_creation_prompt)
-    print('cat_vision_prompt', cat_vision_prompt)
     analyze_prompt = analyze_image_prompt(cat_vision_prompt)
     cat_group = create_cat_rating_group(cat_creation_prompt=generate_prompt,
                                        cat_vision_prompt=analyze_prompt)
     cats = await create_cat_ratings(cat_group.id, generate_prompt, analyze_prompt )
-    print('cats_model', cats)
 
 
     return {"id": cat_group.id, 
