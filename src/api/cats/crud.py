@@ -1,20 +1,20 @@
 from src import db
 from src.api.cats.models import Cat, CatGroup
-from src.api.utils.orchestration import orchestrate_cat_creation_and_analysis
+from src.api.utils.orchestration import generate_and_analyze_cats
 from sqlalchemy.orm import joinedload
 from src.api.utils.openai.prompts import generate_image_prompt, analyze_image_prompt
 from src.api.cats.schemas import CatData
 
-def create_group_and_cats(cat_creation_prompt, cat_vision_prompt):
+async def create_group_and_cats(cat_creation_prompt, cat_vision_prompt):
     '''takes prompts. creates group and cats associated with that group. returns
     dictionary representation of cats group'''
 
-    generate_prompt = generate_image_prompt(cat_creation_prompt)
+    generate_prompt =  generate_image_prompt(cat_creation_prompt)
     print('cat_vision_prompt', cat_vision_prompt)
     analyze_prompt = analyze_image_prompt(cat_vision_prompt)
     cat_group = create_cat_rating_group(cat_creation_prompt=generate_prompt,
                                        cat_vision_prompt=analyze_prompt)
-    cats = create_cat_ratings(cat_group.id, generate_prompt, analyze_prompt )
+    cats = await create_cat_ratings(cat_group.id, generate_prompt, analyze_prompt )
     print('cats_model', cats)
 
 
@@ -34,9 +34,9 @@ def create_cat_rating_group(cat_creation_prompt, cat_vision_prompt):
 
     return cat_group
 
-def create_cat_ratings(cat_group_id, cat_creation_prompt, cat_vision_prompt):
+async def create_cat_ratings(cat_group_id, cat_creation_prompt, cat_vision_prompt):
     '''creates a new cat record with a url and score'''
-    cats = orchestrate_cat_creation_and_analysis(cat_creation_prompt, cat_vision_prompt)
+    cats = await generate_and_analyze_cats(cat_creation_prompt, cat_vision_prompt)
     for cat in cats:
         new_cat = Cat(url=cat['url'], score=cat['score'], cat_group_id=cat_group_id)
         db.session.add(new_cat)

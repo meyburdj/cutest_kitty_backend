@@ -20,15 +20,15 @@ class CatRatingsList(Resource):
     def post(self):
         """Generates 10 cat images, ranks them, stores them in the DB, and returns the group."""
         post_data = request.get_json()
-
+        print('post_data')
         cat_creation = post_data.get("cat_creation")
         print('cat_creation in views', cat_creation)
         cute_vision = post_data.get("cute_vision")  
         print('cute_vision in views', cute_vision)      
 
         try:
-            cat_ratings = create_group_and_cats(cat_creation_prompt=cat_creation, 
-                                          cat_vision_prompt=cute_vision )
+            cat_ratings =  asyncio.run(create_group_and_cats(cat_creation_prompt=cat_creation, 
+                                          cat_vision_prompt=cute_vision ))
             print('cat_ratings in view', cat_ratings)
             response_model = CatRatingResponse(groups=[cat_ratings]) 
             response_model_json = response_model.json()
