@@ -8,3 +8,6 @@ asyncio
 Flask-SQLAlchemy
 psycopg2-binary
 pydantic
+boto3
+requests
+python-dotenv
