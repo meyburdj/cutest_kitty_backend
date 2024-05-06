@@ -47,8 +47,7 @@ def read_all_cat_ratings():
     '''returns a list of dicts i.e. [
         {cat_creation_prompt, cat_vision_prompt, cats: [{}, {}, {}], [{}, {}, {}], 
         {...},...]'''
-    cat_groups = CatGroup.query.options(joinedload(CatGroup.cats)).all()
-    
+    cat_groups = CatGroup.query.order_by(CatGroup.creation_date.desc()).options(joinedload(CatGroup.cats)).all()    
     # Organize data into a list of dictionaries
     cat_ratings = [
         {
