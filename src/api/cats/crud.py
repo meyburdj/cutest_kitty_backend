@@ -62,6 +62,10 @@ def read_all_cat_ratings():
     ]
     return cat_ratings
 
+def count_all_cat_groups():
+    count = CatGroup.query.count()
+    return count
+
 def read_cat_ratings(cat_group_id):
     '''returns a list of dictionaries grouped by cat_rating_id'''
 

@@ -1,7 +1,7 @@
 import asyncio
 from flask_restx import  Namespace, Resource
 from flask import request, Response
-from src.api.cats.crud import read_all_cat_ratings, create_group_and_cats
+from src.api.cats.crud import read_all_cat_ratings, create_group_and_cats, count_all_cat_groups
 from src.api.cats.schemas import CatRatingResponse, CatGroup, CatData, NewCatData
 from flask import jsonify
 
@@ -18,7 +18,13 @@ class CatRatingsList(Resource):
 
 
     def post(self):
-        """Generates 10 cat images, ranks them, stores them in the DB, and returns the group."""
+        """Generates 3 cat images, ranks them, stores them in the DB, and returns the group."""
+        count = count_all_cat_groups()
+        if count >= 1:
+            response = jsonify({"error": "Kitties Are Full. Message Jesse For More."})
+            response.status_code = 403
+            return response
+        
         post_data = request.get_json()
         cat_creation = post_data.get("cat_creation")
         cute_vision = post_data.get("cute_vision")  
