@@ -20,7 +20,7 @@ class CatRatingsList(Resource):
     def post(self):
         """Generates 3 cat images, ranks them, stores them in the DB, and returns the group."""
         count = count_all_cat_groups()
-        if count >= 1:
+        if count >= 150:
             response = jsonify({"error": "Kitties Are Full. Message Jesse For More."})
             response.status_code = 403
             return response
